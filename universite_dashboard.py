@@ -1,6 +1,8 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+import gdown
+
 
 # Sayfa ayarları
 st.set_page_config(page_title="Üniversite Dashboard", layout="wide")
@@ -8,15 +10,15 @@ st.title("🎓 Üniversite Yerleşme Analiz Dashboardu")
 
 # Veri yükleme (cache ile hızlandırma)
 
+import pandas as pd
 
 @st.cache_data
 def load_data():
-    parquet_path = r"C:\Users\gizem\Downloads\All_data.parquet"
-    df = pd.read_parquet(parquet_path)
+    url = "https://raw.githubusercontent.com/gizemyuksel67/streamlit/main/All_data.parquet"
+    df = pd.read_parquet(url)
     
-    # Doluluk oranını hesapla
+    # Doluluk oranı hesapla
     df["Doluluk Oranı"] = df["Toplam Yerleşen"] / df["Toplam Kontenjan"]
-    
     return df
 
 df = load_data()
